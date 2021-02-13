@@ -1,0 +1,166 @@
+body, html{
+	height: 100%;
+}
+body.ovrd-boot{
+	background-color: #000;
+	margin: 0;
+	position: relative;
+}
+
+div.make-progress{
+	position: absolute;
+}
+p.progress-text{
+	padding: 15px 15px 10px 0;
+	margin-left: 15px;
+	font-family:'Roboto', sans-serif;
+	margin-bottom: 0;
+}
+div.progress{
+	margin-left: 15px;
+	height: 11px;
+	width: 120px;
+}
+
+/*Background Image*/
+.image-div{
+	background-image: linear-gradient(50deg, rgba(13, 10, 88, 0.4), rgba(13, 10, 88, 0.1)), url("bgimg.jpg");
+	/* Background image is centered vertically and horizontally at all times */
+	background-position: center center;
+	/* Background image doesn't tile */
+    background-repeat: no-repeat;
+	  
+    /* Background image is fixed in the viewport so that it doesn't move when 
+    the content's height is greater than the image's height */
+    background-attachment: fixed;
+    /* This is what makes the background image rescale based
+    on the container's size */
+    background-size: cover;
+    z-index: -1;
+}
+.set-height{
+	height: 100%;
+}
+
+
+/*Day and Date display styling*/
+.day-date{
+	position: absolute;
+	z-index: 1;
+	right: 15px;
+	padding: 15px 15px 10px 0;
+	font-family:'Roboto', sans-serif;
+	font-size: 1.05rem;
+}
+
+/*Task input*/
+div.input-task{
+	border-radius: 4px;
+	position: absolute;
+    z-index: 10;
+    top: 34%;
+    left: 35%;
+    background-color: #fff;
+    width: 30%;
+    padding: 1.4%;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.input-task p{
+	color: #6c757d;
+	margin: 0;
+	font-size: 0.8rem;
+	position: absolute;
+	right: 1.3rem;
+}
+
+div.add-cancel{
+	padding-top: 5px;
+}
+
+.input-task .btn{
+    margin: 0 1.85% 0 0;
+}
+
+.elementToFadeIn{
+    animation: fadeIn 0.50s linear forwards;
+}
+
+
+/*Content to be displayed*/
+.content-container h1{
+	padding-top: 4.7%;
+	font-family: 'Alex Brush', cursive;
+	font-size: 6.3rem;
+}
+
+.content-container h6{
+	font-family: 'Roboto', sans-serif;
+	margin-bottom: 2.8%;
+}
+
+.content-container{
+	text-align: center;
+	z-index: 1;
+}
+
+.add-task-btn{
+	margin-bottom: 3rem;
+}
+
+/*Task card CSS*/
+div.row{
+	position: relative;
+	margin: 0;
+}
+
+div.task-card{
+	margin-bottom: 50px;
+}
+
+div.card-header{
+	background-color: #cac7c7;
+}
+
+div.card-body{
+	background-color: #b2afc2;
+}
+
+div.done-trash, div.add-cancel{
+	text-align: right;
+}
+
+/*Misc CSS*/
+.blur-bg{
+	/*Makes the background blurred while adding task*/
+	filter: blur(5px);
+	-webkit-filter: blur(5px);
+}
+
+
+button.btn:focus { 
+  /*Removes the button outline on click*/
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.green{
+	background-color: green !important;
+}
+
+/*Queries*/
+@keyframes fadeIn{
+	0% { 
+		visibility: visible;
+		opacity: 0; 
+	}
+	50% { 
+		visibility: visible;
+		opacity: 0.5; 
+	}
+	100% { 
+		visibility: visible;
+		opacity: 1; 
+	} 
+}
