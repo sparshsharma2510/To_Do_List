@@ -5,7 +5,7 @@ const ejs = require("ejs");
 
 const app = express();
 const tasksToDo = [];
-let randomIdx = Math.floor(Math.random()*100);
+let randomIdx = Math.floor(Math.random()*1000);
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static("public"));
@@ -27,7 +27,6 @@ app.get("/",function(req, res){
 	      const data = Buffer.concat(chunks)
 	      var quoteData = JSON.parse(data)
 	      quote = quoteData[randomIdx].text;
-	      console.log(quote);
 	      res.render("tasks", {displayQuote : quote, tasksLeft : tasksToDo});
 	    })
     })

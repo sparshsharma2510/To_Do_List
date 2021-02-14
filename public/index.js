@@ -8,16 +8,9 @@ if(date.getHours() >= 12 && date.getHours() < 17){
 
 else if(date.getHours() >= 17){
 	$("h1").text("Good Evening");
-	$("h5").text("Welcome Back!");
 }
 
-//Day and date display
-let options = {
-	weekday : 'long',
-	day : 'numeric',
-	month : 'long'
-};
-
+//Functions to add behaviour
 function checkHeight(){
 	if($(".task-card").length < 7 && !added){
 		$("div.image-div").addClass("set-height");
@@ -31,7 +24,6 @@ function checkHeight(){
 		$("div.content-container").prepend("<br>");
 }
 
-
 function doneTasksPercentage(){
 	let doneTasks = $(".my-tasks .green").length;
     let totalTasks = $(".task-card").length;	//total tasks
@@ -39,7 +31,6 @@ function doneTasksPercentage(){
     let width = "width :"+percentDone+"%";
     $("div.progress-bar").attr("style", width);
 }
-
 
 $("textarea.form-control").on('keyup paste', function () {
 	let maxchars = 30;
@@ -49,6 +40,12 @@ $("textarea.form-control").on('keyup paste', function () {
     $(".input-task p").text(remain+"/30");
 });
 
+//Day and date display
+let options = {
+	weekday : 'long',
+	day : 'numeric',
+	month : 'long'
+};
 
 const day = date.toLocaleDateString("en-US",options);
 $("p.day-date").text(day);
@@ -74,9 +71,11 @@ $(".add-task-btn").on("click", function(){
 $("button.done").on("click", function(){
 	let containerDiv = $(this).parent();
 	let descriptionDiv = containerDiv.parent();
-    descriptionDiv.addClass("green");
-    containerDiv.remove();
-    doneTasksPercentage();
+	containerDiv.slideUp("slow",function(){
+		descriptionDiv.addClass("green");
+    	containerDiv.remove();
+    	doneTasksPercentage();
+	});
 });
 
 $("button.trash").on("click", function(){
@@ -84,10 +83,11 @@ $("button.trash").on("click", function(){
 	let descriptionDiv = buttonDiv.parent();
 	let cardDiv = descriptionDiv.parent();
 	let finDiv = cardDiv.parent();
-	finDiv.remove();
-	$("div.image-div").css("background-size","cover");
-	checkHeight();
-	doneTasksPercentage();
+	finDiv.fadeOut("slow",function(){
+		finDiv.remove();
+		checkHeight();
+		doneTasksPercentage();
+	});
 });
 
 checkHeight();
