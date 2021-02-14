@@ -41,6 +41,6 @@ app.post("/", function(req, res){
 	res.redirect("/");
 });
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
 	console.log("Server etd. at port 3000");
 });
