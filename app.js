@@ -2,10 +2,28 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https");
 const ejs = require("ejs");
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/ToDoTasks', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const taskSchema = new mongoose.Schema({
+	title : String,
+	description : String
+});
+
+const Task = new mongoose.model('Task',taskSchema);
 
 const app = express();
 const tasksToDo = [];
-let randomIdx = Math.floor(Math.random()*1000);
+Task.find({}, function(err,tasks){
+	if(err)
+		console.log(err);
+	if(tasks.length > 0 && tasks.length !== null){
+		for(let i = 0; i < tasks.length; i++)
+			tasksToDo.push(tasks[i]);
+	}
+});
+let randomIdx = Math.floor(Math.random()*100);
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static("public"));
@@ -32,12 +50,18 @@ app.get("/",function(req, res){
     })
 });
 
-app.post("/", function(req, res){
-	let task = {
+app.post("/", function(req, res){ 
+	let newTask = new Task({
 		title : req.body.title,
 		description : req.body.description
-	}; 
-	tasksToDo.push(task);
+	});
+	newTask.save(function(err){
+		if(err)
+			console.log(err);
+		else
+			console.log("Successfully added a new Article");
+	});
+	tasksToDo.push(newTask);
 	res.redirect("/");
 });
 

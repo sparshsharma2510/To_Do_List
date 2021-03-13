@@ -1,5 +1,3 @@
-let added = true;
-
 //Intro Title Display
 const date = new Date();
 if(date.getHours() >= 12 && date.getHours() < 17){
@@ -10,19 +8,17 @@ else if(date.getHours() >= 17){
 	$("h1").text("Good Evening");
 }
 
-//Functions to add behaviour
-function checkHeight(){
-	if($(".task-card").length < 7 && !added){
-		$("div.image-div").addClass("set-height");
-		added = true
-	}
-	else if($(window).width() > 1028 && $(".task-card").length > 6 && added){
+//Responsiveness addition
+$(window).on('resize', function(){
+	let contentHeight = ($("div.content-container").height() + $("div.my-tasks").height());
+	let bgImgHeight = $("div.image-div").height();
+	if(contentHeight > bgImgHeight)
 		$("div.image-div").removeClass("set-height");
-		added = false;
+	else{
+		if($("div.image-div").hasClass("set-height") === false)
+			$("div.image-div").addClass("set-height");
 	}
-	if($(window).width() < 770)
-		$("div.content-container").prepend("<br>");
-}
+});
 
 function doneTasksPercentage(){
 	let doneTasks = $(".my-tasks .green").length;
@@ -85,9 +81,6 @@ $("button.trash").on("click", function(){
 	let finDiv = cardDiv.parent();
 	finDiv.fadeOut("slow",function(){
 		finDiv.remove();
-		checkHeight();
 		doneTasksPercentage();
 	});
 });
-
-checkHeight();
